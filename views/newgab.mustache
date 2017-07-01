@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Gab</title>
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <div>
+      <ul class='navigation'>
+        <li class='navbar'><a href='/index'>Gabble</a></li>
+        <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
+        <li class='navbar'><a href='/profile'>Logged in as {{username}}</a></li>
+        <li class='navbar'><a href='/logout'>Log out</a></li>
+    </ul>
+    </div><br><br>
+    <div class='forms'id='newgab'>
+      <form action='/newgab' method='post'>
+        <p>Create a new gab</p>
+        <textarea cols='50' rows='7' name='msgBox' id='msgBox'>
+          Type 140 characters only!</textarea>
+        <button type='submit' value='Save' name='saveBtn' id='saveBtn'>
+      </form>
+    </div>
+  </body>
+</html>

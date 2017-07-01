@@ -1,0 +1,29 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body{
+  background-color: #F2F4F4;
+}
+
+#msgBox {
+  border:1px solid grey;
+}
+
+.navigation{
+  display: inline-block;
+}
+
+.navbar {
+  display: inline;
+}

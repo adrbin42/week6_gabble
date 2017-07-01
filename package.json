@@ -1,0 +1,37 @@
+{
+  "name": "week-6-project",
+  "version": "1.0.0",
+  "description": "Gabble Social Network",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrbin42/week6_gabble.git"
+  },
+  "keywords": [
+    "gabble",
+    "week",
+    "6",
+    "social",
+    "network"
+  ],
+  "author": "Adrienne Bing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrbin42/week6_gabble/issues"
+  },
+  "homepage": "https://github.com/adrbin42/week6_gabble#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "express-validator": "^3.2.0",
+    "morgan": "^1.8.2",
+    "mustache": "^2.3.0",
+    "mustache-express": "^1.2.5",
+    "path": "^0.12.7",
+    "sequelize": "^4.2.1"
+  }
+}
