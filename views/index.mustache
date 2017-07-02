@@ -18,14 +18,14 @@
           <ul class='navigation'>
             <li class='navbar'><a href='/index'>Gabble</a></li>
             <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
-            <li class='navbar'><a href='/profile'>Logged in as {{username}}</a></li>
+            <li class='navbar'><a href='/profile'>Logged in as {{user}}</a></li>
             <li class='navbar'><a href='/logout'>Log out</a></li>
           </ul>
         {{/user}}
       </div><br><br>
       <div id='usermessages'>
         <h1>Where user message will be placed</h1>
-        <p>username:message</p>
+        <p>{{user}}:{{messages}}</p>
         <form action="/user/like" method="post">
           <input type='submit' value='Like' name='likeBtn' id='likeBtn'>
         </form>

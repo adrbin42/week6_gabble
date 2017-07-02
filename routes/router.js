@@ -20,7 +20,10 @@ router.get('/', function(req,res){
 
   if(req.session.user){
     res.render("index",
-  {user:req.session.user});
+  {
+    user:req.session.user,
+    messages:req.session.newmsg
+  });
   }else{
     res.redirect("/login");
   }
@@ -33,8 +36,7 @@ router.get('/login', function(req,res){
 router.post('/login', function(req,res){
   models.users.findOne({where:{username:req.body.username}}).then(function(user) {
   let errorMsgs = [];
-  console.log(authUser);
-  console.log('authorized user');
+
   req.checkBody("username", "Please Enter a valid username.").notEmpty().isLength({min: 5, max: 20});
   req.checkBody("password", "Please Enter a Password.").notEmpty();
   req.checkBody("username", "Invalid password and username combination.").equals(user.username);
@@ -72,18 +74,36 @@ router.post('/signup',function(req,res,next){
 
   user.save().then(function(newUser){
     console.log(newUser);
+    res.render("login");
   });
 
-  req.session.user = user;
-  res.render("login");
 });
 
 router.get('/newgab', function(req,res){
-  res.render('newgab');
+  res.render('newgab',{user:req.session.user});
+});
+
+router.post('/newgab', function(req,res){
+  if(req.session.user){
+    const newgab = models.messages.build({
+      message:req.body.msgBox,
+      userid:req.session.user
+    });
+    newgab.save().then(function(newGab){
+      console.log(newGab);
+      req.session.newmsg = req.body.msgBox;
+      res.render('index',
+      {user:req.session.user,
+      messages:req.session.newmsg}
+      );
+    });
+  }else{
+    res.render('login');
+  }
 });
 
 router.get('/likes', function(req,res){
-  res.render('likes');
+  res.render('likes',{user:req.session.user});
 });
 
 module.exports = router;
