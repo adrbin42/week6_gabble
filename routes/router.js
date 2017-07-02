@@ -31,7 +31,31 @@ router.get('/login', function(req,res){
 });
 
 router.post('/login', function(req,res){
+  models.users.findOne({where:{username:req.body.username}}).then(function(user) {
+  let errorMsgs = [];
+  console.log(authUser);
+  console.log('authorized user');
+  req.checkBody("username", "Please Enter a valid username.").notEmpty().isLength({min: 5, max: 20});
+  req.checkBody("password", "Please Enter a Password.").notEmpty();
+  req.checkBody("username", "Invalid password and username combination.").equals(user.username);
+  req.checkBody("password", "Invalid password and username combination.").equals(user.password);
 
+  let errors = req.validationErrors();
+    if (errors) {
+      errors.forEach(function(error) {
+        errorMsgs.push(error.msg);
+  });
+      res.render("login", {errors: errorMsgs});
+    } else {
+      req.session.user = req.body.username;
+      res.redirect("/");
+    }
+  });
+});
+
+router.get('/logout',function(req,res){
+  req.session.destroy();
+  res.redirect('/');
 });
 
 router.get('/signup',function(req,res){
@@ -45,13 +69,13 @@ router.post('/signup',function(req,res,next){
     username: req.body.username,
     password: req.body.password
   });
-  
+
   user.save().then(function(newUser){
     console.log(newUser);
   });
 
   req.session.user = user;
-  res.render("sign up works","login");
+  res.render("login");
 });
 
 router.get('/newgab', function(req,res){

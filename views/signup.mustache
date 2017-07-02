@@ -12,6 +12,14 @@
         <p>{{.}}</p>
         {{/errors}}
       </div>
+      <div>
+        <ul class='navigation'>
+          <li class='navbar'><a href='/index'>Gabble</a></li>
+          <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
+          <li class='navbar'><a href='/login'>Logged in </a></li>
+          <li class='navbar'><a href='/logout'>Log out</a></li>
+      </ul>
+      </div><br><br>
       <div class='signup'>
         <form action="/signup" method="post">
           <input type="text" name="firstname" value="" placeholder="Enter firstname">
