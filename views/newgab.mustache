@@ -8,6 +8,11 @@
   </head>
   <body>
     <div>
+      <div class="errors">
+        {{#errors}}
+        <p>{{.}}</p>
+        {{/errors}}
+      </div>
       <ul class='navigation'>
         <li class='navbar'><a href='/index'>Gabble</a></li>
         <li class='navbar'><a href='/newgab'>Create a new gab</a><li>

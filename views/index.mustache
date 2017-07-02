@@ -7,14 +7,34 @@
     <link rel="stylesheet" href="/css/styles.css">
   </head>
   <body>
-    <div>
-      <ul class='navigation'>
-        <li class='navbar'><a href='/index'>Gabble</a></li>
-        <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
-        <li class='navbar'><a href='/profile'>Logged in as {{username}}</a></li>
-        <li class='navbar'><a href='/logout'>Log out</a></li>
-    </ul>
-    </div><br><br>
-    <h1>Everything Works!</h1>
+    <div class='container'>
+      <div class="errors">
+        {{#errors}}
+        <p>{{.}}</p>
+        {{/errors}}
+      </div>
+      <div>
+        {{#user}}
+          <ul class='navigation'>
+            <li class='navbar'><a href='/index'>Gabble</a></li>
+            <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
+            <li class='navbar'><a href='/profile'>Logged in as {{username}}</a></li>
+            <li class='navbar'><a href='/logout'>Log out</a></li>
+          </ul>
+        {{/user}}
+      </div><br><br>
+      <div id='usermessages'>
+        <h1>Where user message will be placed</h1>
+        <p>username:message</p>
+        <form action="/user/like" method="post">
+          <input type='submit' value='Like' name='likeBtn' id='likeBtn'>
+        </form>
+        <form action="/user/delete" method="post">
+          <input type='submit' value='Delete' name='deleteBtn' id='deleteBtn'>
+        </form>
+        <p>date message was created</p>
+        <p>number of likes</p>
+      </div>
+    </div>
   </body>
 </html>

@@ -16,5 +16,24 @@
     </ul>
     </div><br><br>
     <h1>Login page</h1>
+    <div class='container'>
+      <div class="loginform">
+        <form action="/login" method="post">
+          <div class="errors">
+            {{#errors}}
+            <p>{{.}}</p>
+            {{/errors}}
+          </div>
+          <input type="text" name="username" value="" placeholder="Username"><br>
+          <input type="password" name="password" value="" placeholder="Password"><br>
+          <input type="submit" value='Login' id='loginBtn'>
+        </form>
+      </div>
+      <div>
+        <form action="/signup" method="get">
+          <input type="submit" value="Click for signup" id="signup">
+        </form>
+      </div>
+    </div>
   </body>
 </html>
