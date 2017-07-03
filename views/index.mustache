@@ -24,16 +24,21 @@
         {{/user}}
       </div><br><br>
       <div id='usermessages'>
-        <h1>Where user message will be placed</h1>
-        <p>{{user}}:{{messages}}</p>
+        <!-- <h1>Where user message will be placed</h1> -->
+        {{user}}
+        {{#usermessages}}
+          <p>{{message}}</p>
+          <p>Likes: {{counter}}</p>
+          <p>Message:created {{createdat}}</p>
+        {{/usermessages}}
         <form action="/user/like" method="post">
           <input type='submit' value='Like' name='likeBtn' id='likeBtn'>
         </form>
-        <form action="/user/delete" method="post">
+        <form action="/msg/delete/{{id}}" method="post">
           <input type='submit' value='Delete' name='deleteBtn' id='deleteBtn'>
         </form>
         <p>date message was created</p>
-        <p>number of likes</p>
+        <p>number of likes</p>8
       </div>
     </div>
   </body>

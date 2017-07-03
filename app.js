@@ -21,6 +21,6 @@ app.use(morgan('dev'));
 app.use(routes);
 
 
-app.listen(3200, function(){
-  console.log('App running on http://localhost:3200');
+app.listen(3100, function(){
+  console.log('App running on http://localhost:3100');
 });

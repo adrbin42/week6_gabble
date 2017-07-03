@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        users.belongsToMany(models.messages, { as: 'usermessages', through: 'likes', foreignKey: 'userid' })
+        messages.belongsToMany(models.users, { as: 'usernames', through: 'likes', foreignKey: 'msgid' })
       }
     }
   });
