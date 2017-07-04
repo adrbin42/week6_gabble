@@ -3,39 +3,38 @@ const router = express.Router();
 const models = require('../models');
 const session = require('express-session');
 
-// models.messages.findOne().then(function(message){
-//   console.log(message);
-// })
-
 router.use(session({
   secret:'winnerswin',
   resave: false,
   saveUninitialized: false
 }));
 
+  let likeCount = function(req,res,next){
+    models.likes.count({where:{msgid:req.body.msgid}})
+    .then(function(likecount){
+      res.render('index',{likecount:likecount});
+      console.log('countworks');
+    })
+    next();
+}
+
+// Person.count({where: {name: 'someone2'}}).on('success', function(count) {
+//      console.log("Counted " + count + " elements with name = someone2!")
+//    })
+
+router.use(likeCount);
 
 //Render app home page
 router.get('/', function(req,res){
   if(req.session.username){
-    models.messages.findAll({where:{userid:req.session.id}}).then(function(messages){
-      include:[
-        {
-          model:models.users,
-          as:'usermessages'
-        }
-      ]
-      res.render("index",
-      {
-        user:usermessages.username,
-        messages:models.messages.message,
-        msgscreated:models.messages.createdAt
-      });
-    })
-
+    models.messages.findAll({include:[{model:models.users,as:'usermessages'}]})
+    .then(function(messages){
+      res.render('index', {messages:messages,likecount:likecount});
+    });
   }else{
     res.redirect("/login");
-  }
-});
+    }
+  });
 
 router.get('/login', function(req,res){
   res.render('login');
@@ -43,33 +42,20 @@ router.get('/login', function(req,res){
 
 router.post('/login', function(req,res){
   models.users.findOne({where:{username:req.body.username}}).then(function(user) {
+    console.log(user.username);
 
-    let errorMsgs = [];
-
-    req.checkBody("username", "Please Enter a valid username.").notEmpty().isLength({min: 5, max: 20});
-    req.checkBody("password", "Please Enter a Password.").notEmpty();
-    req.checkBody("username", "Invalid password and username combination.").equals(user.username);
-    req.checkBody("password", "Invalid password and username combination.").equals(user.password);
-
-    let errors = req.validationErrors();
-      if (errors) {
-        errors.forEach(function(error) {
-          errorMsgs.push(error.msg);
-    });
-        res.render("login", {errors: errorMsgs});
-      } else {
-        req.session.username = models.users.username;
-        req.session.id = models.users.id;
-        req.session.firstname = models.users.firstname;
-        req.session.lastname = models.users.lastname;
-        req.session.createdat = models.users.createdAt;
+        req.session.username = user.username;
+        req.session.id = user.id;
+        req.session.firstname = user.firstname;
+        req.session.lastname = user.lastname;
+        req.session.createdat = user.createdAt;
         res.redirect("/");
-        }
+
       })//end promise for finding a user
-
-
-
-    });
+    if(req.body.username === undefined){
+      res.render('login',{errors:'Invalid password and username combination.'});
+    }
+});
 
 router.get('/logout',function(req,res){
   req.session.destroy();
@@ -105,8 +91,8 @@ router.post('/newgab', function(req,res){
       message:req.body.msgBox,
       userid:req.session.id
     });
-    newgab.save().then(function(newGab){
-      console.log(newGab);
+    newgab.save().then(function(newgab){
+      console.log(newgab);
       req.session.newmsg = req.body.msgBox;
       res.render('index',
       {user:req.session.username,
@@ -118,20 +104,23 @@ router.post('/newgab', function(req,res){
   }
 });
 
-router.post('/likes', function(req,res){
-  let counter = 0;
-  counter++;
-  req.session.counter = counter;
-  res.render('index',{user:req.session.username,counter:req.session.counter});
+router.post('/user/likes', function(req,res){
+
+    models.likes
+    .findOrCreate({where:
+      {msgid:req.body.msgid,
+      userid:req.body.userid}})
+    .spread(function(like, created){
+        console.log("CREATED--- ", created);
+        res.redirect('/?msgid='+req.body.msgid);
+      });
+
+  });
+
+router.post('/msg/delete', function(req,res){
+  models.messages.destroy({where:{id:req.body.delete}}).then(function(message){
+    res.redirect('/');
+  });
 });
-
-// router.post('/msg/delete/:id', function(req,res){
-
-//   models.messages.destroy({where:{id:req.params.msgid}).then(function(message){
-//   res.render('index',{messages});
-//   console.log('show all messages on home page');
-//   });
-//
-// });
 
 module.exports = router;

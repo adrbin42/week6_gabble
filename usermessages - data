@@ -1,0 +1,142 @@
+messages {
+
+  dataValues://messages[i].dataValues
+   { id: 1, //this is message id from messages table
+     title: 'New car',
+     message: 'Thinking of buying a car',
+     userid: 4,
+     createdAt: 2017-07-03T09:24:10.864Z,
+     updatedAt: 2017-07-03T09:24:10.864Z,
+     usermessages:
+      users {
+        dataValues: [Object],
+        _previousDataValues: [Object],
+        _changed: {},
+        _modelOptions: [Object],
+        _options: [Object],
+        hasPrimaryKeys: true,
+        __eagerlyLoadedAssociations: [],
+        isNewRecord: false } },
+
+  _previousDataValues:
+   { id: 1,
+     title: 'New car',
+     message: 'Thinking of buying a car',
+     userid: 4,
+     createdAt: 2017-07-03T09:24:10.864Z,
+     updatedAt: 2017-07-03T09:24:10.864Z,
+     usermessages:
+      users {
+        dataValues: [Object],
+        _previousDataValues: [Object],
+        _changed: {},
+        _modelOptions: [Object],
+        _options: [Object],
+        hasPrimaryKeys: true,
+        __eagerlyLoadedAssociations: [],
+        isNewRecord: false } },
+  _changed: {},
+
+  _modelOptions:
+   { timestamps: true,
+     validate: {},
+     freezeTableName: false,
+     underscored: false,
+     underscoredAll: false,
+     paranoid: false,
+     rejectOnEmpty: false,
+     whereCollection: null,
+     schema: null,
+     schemaDelimiter: '',
+     defaultScope: {},
+     scopes: [],
+     hooks: {},
+     indexes: [],
+     name: { plural: 'messages', singular: 'message' },
+     omitNull: false,
+     sequelize:
+      Sequelize {
+        options: [Object],
+        config: [Object],
+        dialect: [Object],
+        models: [Object],
+        modelManager: [Object],
+        connectionManager: [Object],
+        importCache: [Object],
+        test: [Object],
+        queryInterface: [Object] },
+     uniqueKeys: {},
+     hasPrimaryKeys: true },
+
+  _options:
+   { isNewRecord: false,
+     _schema: null,
+     _schemaDelimiter: '',
+     include: [ [Object] ],
+     includeNames: [ 'usermessages' ],
+     includeMap: { usermessages: [Object] },
+     includeValidated: true,
+     attributes: [ 'id', 'title', 'message', 'userid', 'createdAt', 'updatedAt' ],
+     raw: true },
+
+  hasPrimaryKeys: true,
+
+  __eagerlyLoadedAssociations: [],
+
+  isNewRecord: false,
+
+  usermessages: //messages[i].usermessages.users.dataValues
+   users {
+     dataValues:
+      { id: 4,
+        firstname: 'James',
+        lastname: 'Brown',
+        username: 'jbrown',
+        password: 'flames',
+        createdAt: 2017-07-02T01:29:08.426Z,
+        updatedAt: 2017-07-02T01:29:08.426Z },
+     _previousDataValues:
+      { id: 4,
+        firstname: 'James',
+        lastname: 'Brown',
+        username: 'jbrown',
+        password: 'flames',
+        createdAt: 2017-07-02T01:29:08.426Z,
+        updatedAt: 2017-07-02T01:29:08.426Z },
+     _changed: {},
+     _modelOptions:
+      { timestamps: true,
+        validate: {},
+        freezeTableName: false,
+        underscored: false,
+        underscoredAll: false,
+        paranoid: false,
+        rejectOnEmpty: false,
+        whereCollection: [Object],
+        schema: null,
+        schemaDelimiter: '',
+        defaultScope: {},
+        scopes: [],
+        hooks: {},
+        indexes: [],
+        name: [Object],
+        omitNull: false,
+        classMethods: [Object],
+        sequelize: [Object],
+        uniqueKeys: {},
+        hasPrimaryKeys: true },
+     _options:
+      { isNewRecord: false,
+        _schema: null,
+        _schemaDelimiter: '',
+        include: undefined,
+        includeNames: undefined,
+        includeMap: undefined,
+        includeValidated: true,
+        raw: true,
+        attributes: undefined },
+     hasPrimaryKeys: true,
+     __eagerlyLoadedAssociations: [],
+     isNewRecord: false }
+
+      }

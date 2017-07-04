@@ -13,32 +13,33 @@
         <p>{{.}}</p>
         {{/errors}}
       </div>
-      <div>
-        {{#user}}
+      <div class="navigation">
+
           <ul class='navigation'>
             <li class='navbar'><a href='/index'>Gabble</a></li>
-            <li class='navbar'><a href='/newgab'>Create a new gab</a><li>
-            <li class='navbar'><a href='/profile'>Logged in as {{user}}</a></li>
+            <li class='navbar'><a href='/newgab'>Create a new gab</a></li>
+            <li class='navbar'><a href='/profile'>Logged in as
+              {{messages.usermessages.username}}</a></li>
             <li class='navbar'><a href='/logout'>Log out</a></li>
           </ul>
-        {{/user}}
+
       </div><br><br>
       <div id='usermessages'>
-        <!-- <h1>Where user message will be placed</h1> -->
-        {{user}}
-        {{#usermessages}}
-          <p>{{message}}</p>
-          <p>Likes: {{counter}}</p>
-          <p>Message:created {{createdat}}</p>
-        {{/usermessages}}
-        <form action="/user/like" method="post">
-          <input type='submit' value='Like' name='likeBtn' id='likeBtn'>
-        </form>
-        <form action="/msg/delete/{{id}}" method="post">
-          <input type='submit' value='Delete' name='deleteBtn' id='deleteBtn'>
-        </form>
-        <p>date message was created</p>
-        <p>number of likes</p>8
+        {{#messages}}
+            <p class='pagebody' id='userMsgs'>{{usermessages.username}}&nbsp;&nbsp;{{message}}</p>
+            <p class='pagebody'>{{createdAt}}</p>
+
+            <form action="/user/likes" method="post">
+
+              <button value='{{id}}' name='msgid' id='likeBtn'>Like</button>
+              <input type='hidden' name='userid' value='{{userid}}'>
+              <button value='{{likecount}}' name='likecount' id='countBtn'>{{likecount}}</button>
+            </form>
+            <form action="/msg/delete" method="post">
+              <button value='{{id}}' name='delete' id='deleteBtn'>Delete</button>
+            </form>
+
+        {{/messages}}
       </div>
     </div>
   </body>
